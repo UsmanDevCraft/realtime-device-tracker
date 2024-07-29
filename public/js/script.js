@@ -1,6 +1,6 @@
 const socket = io({
     forceNew: true,
-    transports: ["polling"]
+    transports: ['polling', 'websocket']
 });
 
 if (navigator.geolocation) {
