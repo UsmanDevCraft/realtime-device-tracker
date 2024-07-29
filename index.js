@@ -16,9 +16,9 @@ const io = socketio(server, {
 });
 
 app.use(cors({
-  origin: 'https://realtime-device-tracker-system.vercel.app', // Update with your client URL
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+    origin: 'https://realtime-device-tracker-system.vercel.app',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.set("view engine", "ejs");
