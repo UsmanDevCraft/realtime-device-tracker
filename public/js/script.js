@@ -1,7 +1,6 @@
-// const socket = io();
-var socket = io.connect("http://localhost:5000", {
+const socket = io({
     forceNew: true,
-    transports: ["polling"],
+    transports: ["polling"]
 });
 
 if (navigator.geolocation) {
