@@ -1,4 +1,8 @@
-const socket = io();
+// const socket = io();
+var socket = io.connect("http://localhost:5000", {
+    forceNew: true,
+    transports: ["polling"],
+});
 
 if (navigator.geolocation) {
     navigator.geolocation.watchPosition(
