@@ -2,12 +2,24 @@ const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000; // Use dynamic port for deployment environments
 
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, {
+    cors: {
+        origin: '*', // Update this to specific origins in production
+        methods: ['GET', 'POST']
+    }
+});
+
+app.use(cors({
+    origin: 'https://realtime-device-tracker-system.vercel.app', // Replace with your client's URL
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
