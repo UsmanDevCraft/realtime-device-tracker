@@ -1,6 +1,14 @@
-const socket = io({
-    forceNew: true,
-    transports: ['polling', 'websocket']
+// const socket = io({
+//     forceNew: true,
+//     transports: ['websocket']
+// });
+
+const socket = io('', {
+    // Send auth token on connection, you will need to DI the Auth service above
+    // 'query': 'token=' + Auth.getToken()
+    path: '/socket.io',
+    transports: ['websocket'],
+    secure: true,
 });
 
 if (navigator.geolocation) {
