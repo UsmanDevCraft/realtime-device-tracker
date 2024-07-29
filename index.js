@@ -13,22 +13,25 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-io.on("connection", (socket)=>{
-    socket.on("send-location", (data)=>{
-        io.emit("recieve-location", {id: socket.id, ...data});
+io.on("connection", (socket) => {
+    console.log("connected");
+
+    socket.on("send-location", (data) => {
+        if (data.latitude && data.longitude) {
+            io.emit("recieve-location", { id: socket.id, ...data });
+        } else {
+            console.error("Invalid data received", data);
+        }
     });
 
     socket.on("disconnect", () => {
         io.emit("user-disconnected", socket.id);
     });
-
-    console.log("connected");
 });
 
 app.get("/", (req, res) => {
     res.render("index");
 });
-
 
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
